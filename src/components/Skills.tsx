@@ -5,15 +5,15 @@ import { Progress } from '@/components/ui/progress';
 
 const Skills = () => {
   const skills = [
-    { name: 'Front-End Development', level: 95, description: 'Creating responsive and interactive user interfaces using React, Next.js, HTML5, CSS3/SCSS, and Tailwind CSS' },
-    { name: 'Back-End Development', level: 85, description: 'Building robust server-side applications with Node.js, Express, Python, and database management' },
-    { name: 'UI/UX Design', level: 80, description: 'Designing user-friendly interfaces and experiences with tools like Figma and Adobe XD' },
-    { name: 'Mobile Development', level: 75, description: 'Developing cross-platform mobile applications with React Native and Flutter' }
+    { name: 'Backend Development', level: 95, description: 'Building robust server-side applications with .NET, C#, SQL Server, and RESTful API development' },
+    { name: 'Frontend Development', level: 80, description: 'Creating responsive user interfaces using HTML, CSS, Bootstrap, Tailwind CSS, and JavaScript' }
   ];
 
   const technologies = [
-    'React', 'TypeScript', 'Node.js', 'Next.js', 'GraphQL', 'MongoDB', 
-    'PostgreSQL', 'Tailwind CSS', 'Express', 'Docker', 'AWS', 'Git'
+    // Backend technologies
+    '.NET', 'C#', 'ASP.NET Core', 'Entity Framework', 'SQL Server', 'RESTful APIs', 
+    // Frontend technologies
+    'HTML', 'CSS', 'Bootstrap', 'Tailwind CSS', 'JavaScript'
   ];
 
   return (
