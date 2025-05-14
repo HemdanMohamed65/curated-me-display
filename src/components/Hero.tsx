@@ -13,15 +13,15 @@ const Hero = () => {
               <span className="text-primary">Hello, I'm</span>
               <br />
               <span className="relative inline-block">
-                John Doe
+                Hemdan Mohamed
                 <span className="absolute -bottom-1 left-0 w-full h-1 bg-primary/30"></span>
               </span>
             </h1>
             <h2 className="text-xl md:text-2xl text-muted-foreground mb-8">
-              Full Stack Developer & UI/UX Designer
+              BackEnd .NET Developer
             </h2>
             <p className="text-lg mb-8 max-w-lg mx-auto md:mx-0">
-              I create beautiful, functional websites and applications that deliver exceptional user experiences.
+              I create efficient and scalable applications with a focus on .NET technologies and backend development.
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <Button size="lg">

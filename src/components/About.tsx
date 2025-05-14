@@ -22,22 +22,21 @@ const About = () => {
             </div>
             <div className="absolute -bottom-6 -right-6 bg-background p-6 rounded-xl shadow-lg">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-primary mb-2">5+</h3>
-                <p className="text-sm text-muted-foreground">Years of experience</p>
+                <h3 className="text-2xl font-bold text-primary mb-2">4+</h3>
+                <p className="text-sm text-muted-foreground">Years of study</p>
               </div>
             </div>
           </div>
           
           <div className="animate-slide-up">
             <h3 className="text-2xl font-serif mb-4">
-              A passionate developer with a keen eye for design
+              A dedicated BackEnd .NET developer with academic excellence
             </h3>
             <p className="mb-4">
-              I'm a full-stack developer with 5+ years of experience building responsive, user-friendly websites and applications. 
-              My journey in tech began when I built my first website at the age of 16, and I've been hooked ever since.
+              I'm Hemdan Mohamed, a BackEnd .NET developer with a focus on building efficient and scalable applications. Currently in my fourth year at the Faculty of Science, Menoufia University, studying Physics and Computer Science.
             </p>
             <p className="mb-6">
-              I specialize in creating seamless experiences using modern frameworks and technologies. My approach combines technical excellence with a deep understanding of user-centered design principles to deliver products that are both visually appealing and highly functional.
+              I am passionate about solving complex problems and constantly learning new technologies. My approach combines technical expertise with a strong foundation in computer science principles to deliver robust and reliable backend solutions.
             </p>
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="flex items-center space-x-2">
@@ -55,7 +54,7 @@ const About = () => {
                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>Front-End Development</span>
+                <span>.NET Development</span>
               </div>
               <div className="flex items-center space-x-2">
                 <svg
@@ -72,7 +71,7 @@ const About = () => {
                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>Back-End Development</span>
+                <span>Backend Architecture</span>
               </div>
               <div className="flex items-center space-x-2">
                 <svg
@@ -89,7 +88,7 @@ const About = () => {
                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>UI/UX Design</span>
+                <span>Database Design</span>
               </div>
               <div className="flex items-center space-x-2">
                 <svg
@@ -106,7 +105,7 @@ const About = () => {
                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>Mobile Development</span>
+                <span>API Development</span>
               </div>
             </div>
             <Button 
