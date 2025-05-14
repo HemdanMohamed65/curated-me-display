@@ -12,6 +12,7 @@ const Skills = () => {
   const technologies = [
     // Backend technologies
     '.NET', 'C#', 'ASP.NET Core', 'Entity Framework', 'SQL Server', 'RESTful APIs', 
+    'OOP', 'Data Structures', 'Algorithms', 'LINQ', 'EF Core', 'SOLID Principles',
     // Frontend technologies
     'HTML', 'CSS', 'Bootstrap', 'Tailwind CSS', 'JavaScript'
   ];

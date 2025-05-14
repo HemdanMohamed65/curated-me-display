@@ -15,8 +15,8 @@ const About = () => {
           <div className="relative">
             <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
               <img
-                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
-                alt="Working on a project"
+                src="/lovable-uploads/25d8c34a-d7a9-45bd-b35f-757a90c0f6d4.png"
+                alt="Hemdan Mohamed"
                 className="w-full h-full object-cover"
               />
             </div>
