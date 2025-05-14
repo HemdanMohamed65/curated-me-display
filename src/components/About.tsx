@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const About = () => {
   return (
@@ -13,12 +14,14 @@ const About = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
-              <img
-                src="/lovable-uploads/25d8c34a-d7a9-45bd-b35f-757a90c0f6d4.png"
-                alt="Hemdan Mohamed"
-                className="w-full h-full object-cover"
-              />
+            <div className="rounded-2xl overflow-hidden bg-muted">
+              <AspectRatio ratio={1/1} className="w-full">
+                <img
+                  src="/lovable-uploads/25d8c34a-d7a9-45bd-b35f-757a90c0f6d4.png"
+                  alt="Hemdan Mohamed"
+                  className="w-full h-full object-cover object-center"
+                />
+              </AspectRatio>
             </div>
             <div className="absolute -bottom-6 -right-6 bg-background p-6 rounded-xl shadow-lg">
               <div className="text-center">
