@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { Mail, Phone } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -40,46 +40,16 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-          />
-        </svg>
-      ),
+      icon: <Mail className="w-6 h-6" />,
       label: 'Email',
-      value: 'contact@johndoe.com',
-      href: 'mailto:contact@johndoe.com'
+      value: 'hemdannada65@gmail.com',
+      href: 'mailto:hemdannada65@gmail.com'
     },
     {
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-          />
-        </svg>
-      ),
+      icon: <Phone className="w-6 h-6" />,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      value: '+20 1142170980',
+      href: 'tel:+201142170980'
     },
     {
       icon: (
@@ -104,7 +74,7 @@ const Contact = () => {
         </svg>
       ),
       label: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Menoufia, Egypt',
       href: '#'
     }
   ];
