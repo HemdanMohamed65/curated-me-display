@@ -1,128 +1,107 @@
 
-import React, { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import LanguageSwitcher from './LanguageSwitcher';
+import { LanguageContext } from '@/context/LanguageContext';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language } = useContext(LanguageContext);
+  const isRTL = language === 'ar';
 
+  // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
+      setScrolled(window.scrollY > 10);
     };
-
+    
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrolled]);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const menuItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+  const translations = {
+    en: {
+      home: 'Home',
+      about: 'About',
+      skills: 'Skills',
+      projects: 'Projects',
+      contact: 'Contact',
+    },
+    ar: {
+      home: 'الرئيسية',
+      about: 'عني',
+      skills: 'المهارات',
+      projects: 'المشاريع',
+      contact: 'اتصل بي',
+    }
+  };
+
+  const t = translations[language];
+
+  const navItems = [
+    { label: t.home, href: '#hero' },
+    { label: t.about, href: '#about' },
+    { label: t.skills, href: '#skills' },
+    { label: t.projects, href: '#projects' },
+    { label: t.contact, href: '#contact' },
   ];
 
   return (
-    <header
-      className={cn(
-        "fixed w-full top-0 z-50 transition-all duration-300",
-        scrolled 
-          ? "bg-background/95 backdrop-blur-sm shadow-sm py-3"
-          : "bg-transparent py-4"
-      )}
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-background/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
+      }`}
+      dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <div className="container-custom flex items-center justify-between">
-        <a href="#home" className="text-2xl font-serif font-bold text-primary">
-          Portfolio
+      <div className="container-custom flex items-center justify-between h-20">
+        <a href="#hero" className="text-xl font-bold font-serif text-primary">
+          Hemdan
         </a>
-
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {menuItems.map((item) => (
+        
+        {/* Desktop navigation */}
+        <nav className="hidden md:flex items-center space-x-2">
+          {navItems.map((item, index) => (
             <a
-              key={item.name}
+              key={index}
               href={item.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-200"
+              className={`px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors ${
+                isRTL ? 'ml-4' : 'mr-4'
+              }`}
             >
-              {item.name}
+              {item.label}
             </a>
           ))}
-          <Button
-            className="ml-2"
-            onClick={() => window.open('#contact', '_self')}
-          >
-            Hire Me
-          </Button>
+          <LanguageSwitcher />
         </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          )}
-        </button>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <nav className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm shadow-md py-6 px-4 flex flex-col space-y-4">
-            {menuItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-200"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-            <Button
-              onClick={() => {
-                window.open('#contact', '_self');
-                setMobileMenuOpen(false);
-              }}
-            >
-              Hire Me
-            </Button>
-          </nav>
-        )}
+        
+        {/* Mobile navigation */}
+        <div className="flex items-center space-x-4 md:hidden">
+          <LanguageSwitcher />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="relative">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side={isRTL ? "right" : "left"}>
+              <nav className="flex flex-col space-y-4 mt-10">
+                {navItems.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.href}
+                    className={`px-4 py-2 text-foreground/70 hover:text-foreground transition-colors ${
+                      isRTL ? 'text-right' : 'text-left'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

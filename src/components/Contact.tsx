@@ -1,12 +1,59 @@
-import React, { useState } from 'react';
+
+import React, { useState, useContext } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, MessageSquare, Send, Language } from 'lucide-react';
+import { LanguageContext } from '@/context/LanguageContext';
 
 const Contact = () => {
+  const { language } = useContext(LanguageContext);
+  const translations = {
+    en: {
+      sectionTitle: 'Get In Touch',
+      sectionSubtitle: 'Have a project in mind or want to explore opportunities? Let\'s connect!',
+      contactInfo: 'Contact Information',
+      email: 'Email',
+      phone: 'Phone',
+      location: 'Location',
+      followMe: 'Follow Me',
+      sendMessage: 'Send Me a Message',
+      name: 'Name',
+      subject: 'Subject',
+      message: 'Message',
+      sendButton: 'Send Message via WhatsApp',
+      sending: 'Sending...',
+      namePlaceholder: 'Your name',
+      emailPlaceholder: 'Your email',
+      subjectPlaceholder: 'Subject',
+      messagePlaceholder: 'Your message',
+    },
+    ar: {
+      sectionTitle: 'تواصل معي',
+      sectionSubtitle: 'هل لديك مشروع في ذهنك أو تريد استكشاف الفرص؟ دعنا نتواصل!',
+      contactInfo: 'معلومات الاتصال',
+      email: 'البريد الإلكتروني',
+      phone: 'الهاتف',
+      location: 'الموقع',
+      followMe: 'تابعني',
+      sendMessage: 'أرسل لي رسالة',
+      name: 'الاسم',
+      subject: 'الموضوع',
+      message: 'الرسالة',
+      sendButton: 'إرسال رسالة عبر واتساب',
+      sending: 'جاري الإرسال...',
+      namePlaceholder: 'اسمك',
+      emailPlaceholder: 'بريدك الإلكتروني',
+      subjectPlaceholder: 'الموضوع',
+      messagePlaceholder: 'رسالتك',
+    },
+  };
+
+  const t = translations[language];
+  const isRTL = language === 'ar';
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -25,29 +72,47 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success('Message sent successfully!');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+    // Validate form
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error(language === 'en' ? 'Please fill all required fields' : 'يرجى ملء جميع الحقول المطلوبة');
       setIsSubmitting(false);
-    }, 1500);
+      return;
+    }
+    
+    // Prepare WhatsApp message
+    const phoneNumber = '201142170980'; // Format: country code + phone number without +
+    const messageText = `Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+Message: ${formData.message}`;
+    
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageText)}`;
+    
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
+    
+    // Reset form and show success message
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+    
+    toast.success(language === 'en' ? 'WhatsApp opened with your message!' : 'تم فتح واتساب برسالتك!');
+    setIsSubmitting(false);
   };
 
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
-      label: 'Email',
+      label: t.email,
       value: 'hemdannada65@gmail.com',
       href: 'mailto:hemdannada65@gmail.com'
     },
     {
       icon: <Phone className="w-6 h-6" />,
-      label: 'Phone',
+      label: t.phone,
       value: '+20 1142170980',
       href: 'tel:+201142170980'
     },
@@ -73,23 +138,23 @@ const Contact = () => {
           />
         </svg>
       ),
-      label: 'Location',
+      label: t.location,
       value: 'Menoufia, Egypt',
       href: '#'
     }
   ];
 
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" className="section-padding" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container-custom">
-        <h2 className="section-title">Get In Touch</h2>
+        <h2 className="section-title">{t.sectionTitle}</h2>
         <p className="section-subtitle">
-          Have a project in mind or want to explore opportunities? Let's connect!
+          {t.sectionSubtitle}
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
-            <h3 className="text-xl font-medium mb-6">Contact Information</h3>
+            <h3 className="text-xl font-medium mb-6">{t.contactInfo}</h3>
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <a 
@@ -109,7 +174,7 @@ const Contact = () => {
             </div>
             
             <div className="mt-12">
-              <h3 className="text-xl font-medium mb-6">Follow Me</h3>
+              <h3 className="text-xl font-medium mb-6">{t.followMe}</h3>
               <div className="flex gap-4">
                 {['github', 'twitter', 'linkedin', 'instagram'].map((social) => (
                   <a key={social} href={`#${social}`} className="p-3 bg-secondary rounded-full hover:bg-primary hover:text-white transition-colors">
@@ -134,18 +199,18 @@ const Contact = () => {
             </div>
           </div>
           
-          <Card className="lg:col-span-2 p-6">
-            <h3 className="text-xl font-medium mb-6">Send Me a Message</h3>
+          <Card className={`lg:col-span-2 p-6 ${isRTL ? 'text-right' : ''}`}>
+            <h3 className="text-xl font-medium mb-6">{t.sendMessage}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-1">
-                    Name
+                    {t.name}
                   </label>
                   <Input
                     id="name"
                     name="name"
-                    placeholder="Your name"
+                    placeholder={t.namePlaceholder}
                     required
                     value={formData.name}
                     onChange={handleChange}
@@ -153,13 +218,13 @@ const Contact = () => {
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-1">
-                    Email
+                    {t.email}
                   </label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="Your email"
+                    placeholder={t.emailPlaceholder}
                     required
                     value={formData.email}
                     onChange={handleChange}
@@ -168,25 +233,24 @@ const Contact = () => {
               </div>
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium mb-1">
-                  Subject
+                  {t.subject}
                 </label>
                 <Input
                   id="subject"
                   name="subject"
-                  placeholder="Subject"
-                  required
+                  placeholder={t.subjectPlaceholder}
                   value={formData.subject}
                   onChange={handleChange}
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-1">
-                  Message
+                  {t.message}
                 </label>
                 <Textarea
                   id="message"
                   name="message"
-                  placeholder="Your message"
+                  placeholder={t.messagePlaceholder}
                   rows={5}
                   required
                   value={formData.message}
@@ -194,7 +258,8 @@ const Contact = () => {
                 />
               </div>
               <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? t.sending : t.sendButton}
+                <Send className="w-4 h-4 ml-2" />
               </Button>
             </form>
           </Card>
