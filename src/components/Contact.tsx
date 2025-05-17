@@ -1,11 +1,10 @@
-
 import React, { useState, useContext } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { Mail, Phone, MessageSquare, Send, Language } from 'lucide-react';
+import { Mail, Phone, MessageSquare, Send, Languages } from 'lucide-react';
 import { LanguageContext } from '@/context/LanguageContext';
 
 const Contact = () => {

@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
 import { Button } from '@/components/ui/button';
-import { Language } from 'lucide-react';
+import { Languages } from 'lucide-react';
 import { LanguageContext } from '@/context/LanguageContext';
 
 const LanguageSwitcher = () => {
@@ -15,7 +15,7 @@ const LanguageSwitcher = () => {
       className="rounded-full"
       title={language === 'en' ? 'Switch to Arabic' : 'التبديل إلى الإنجليزية'}
     >
-      <Language className="w-5 h-5" />
+      <Languages className="w-5 h-5" />
       <span className="ml-2 sr-only">{language === 'en' ? 'AR' : 'EN'}</span>
     </Button>
   );
