@@ -1,16 +1,55 @@
 
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { LanguageContext } from "@/context/LanguageContext";
 
 const Hero = () => {
+  const { language } = useContext(LanguageContext);
+  const isRTL = language === 'ar';
+
+  const translations = {
+    en: {
+      greeting: "Hello, I'm",
+      role: "BackEnd .NET Developer",
+      description: "I create efficient and scalable applications with a focus on .NET technologies and backend development.",
+      viewWork: "View My Work",
+      contactMe: "Contact Me",
+      scrollDown: "Scroll Down"
+    },
+    ar: {
+      greeting: "مرحباً، أنا",
+      role: "مطور BackEnd .NET",
+      description: "أقوم بإنشاء تطبيقات فعالة وقابلة للتوسع مع التركيز على تقنيات .NET وتطوير الخادم.",
+      viewWork: "عرض أعمالي",
+      contactMe: "تواصل معي",
+      scrollDown: "مرر لأسفل"
+    }
+  };
+
+  const t = translations[language];
+
   return (
-    <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-24">
+    <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-24" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-1 text-center md:text-left animate-fade-in">
+        <div className="flex flex-col items-center text-center gap-8">
+          {/* Circular Profile Image */}
+          <div className="relative">
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl bg-muted">
+              <img
+                src="/lovable-uploads/25d8c34a-d7a9-45bd-b35f-757a90c0f6d4.png"
+                alt="Hemdan Mohamed"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            {/* Decorative Ring */}
+            <div className="absolute -inset-4 rounded-full border-2 border-primary/30 animate-pulse"></div>
+          </div>
+
+          {/* Content */}
+          <div className="animate-fade-in max-w-4xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <span className="text-primary">Hello, I'm</span>
+              <span className="text-primary">{t.greeting}</span>
               <br />
               <span className="relative inline-block">
                 Hemdan Mohamed
@@ -18,41 +57,29 @@ const Hero = () => {
               </span>
             </h1>
             <h2 className="text-xl md:text-2xl text-muted-foreground mb-8">
-              BackEnd .NET Developer
+              {t.role}
             </h2>
-            <p className="text-lg mb-8 max-w-lg mx-auto md:mx-0">
-              I create efficient and scalable applications with a focus on .NET technologies and backend development.
+            <p className="text-lg mb-8 max-w-2xl mx-auto">
+              {t.description}
             </p>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg">
-                View My Work
+                {t.viewWork}
               </Button>
               <Button
                 variant="outline"
                 size="lg"
                 onClick={() => window.open('#contact', '_self')}
               >
-                Contact Me
+                {t.contactMe}
               </Button>
-            </div>
-          </div>
-          <div className={cn(
-            "flex-1 relative",
-            "before:absolute before:-top-4 before:-left-4 before:w-24 before:h-24 before:border-t-2 before:border-l-2 before:border-primary before:-z-10",
-            "after:absolute after:-bottom-4 after:-right-4 after:w-24 after:h-24 after:border-b-2 after:border-r-2 after:border-primary after:-z-10"
-          )}>
-            <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
-              <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
-                alt="Professional headshot"
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
         </div>
       </div>
+      
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center animate-bounce">
-        <span className="text-sm text-muted-foreground mb-2">Scroll Down</span>
+        <span className="text-sm text-muted-foreground mb-2">{t.scrollDown}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
